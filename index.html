@@ -1,1767 +1,403 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ᥫ᭡ Riri </title>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
- 
-<style>
-/* ================================================================
-   ✦ VARIABLES GLOBALES
-================================================================ */
-:root {
-  --pink-hot:     #ff6eb4;
-  --pink-mid:     #ff9ece;
-  --pink-soft:    #ffc8e3;
-  --pink-pale:    #ffe4f2;
-  --rose-gold:    #d47aad;
-  --rose-shine:   #e8b4a0;
-  --gold:         #f0c060;
-  --gold-light:   #fde8a0;
-  --cream:        #fff8f4;
-  --white-warm:   #fffcfa;
-  --purple-soft:  #e8d0f8;
-  --mint-soft:    #d0f0e8;
-  --text-dark:    #3d1f2f;
-  --text-mid:     #7a4060;
-  --text-soft:    #b07090;
-  --glass:        rgba(255,255,255,0.55);
-  --glass-border: rgba(255,180,210,0.4);
-  --shadow-pink:  0 8px 40px rgba(255,110,180,0.2);
-  --shadow-deep:  0 16px 60px rgba(200,80,140,0.25);
-  --r-xl:  28px;
-  --r-lg:  20px;
-  --r-md:  14px;
-  --r-sm:   9px;
-  --r-pill: 999px;
-  --ff-title: 'Pacifico', cursive;
-  --ff-head:  'Quicksand', sans-serif;
-  --ff-body:  'Nunito', sans-serif;
-  --ease: all 0.35s cubic-bezier(.4,0,.2,1);
-}
- 
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
- 
-html { scroll-behavior:smooth; }
- 
-body {
-  font-family: var(--ff-body);
-  color: var(--text-dark);
-  background: var(--cream);
-  min-height: 100vh;
-  overflow-x: hidden;
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='5' fill='%23ff6eb4' opacity='0.7'/%3E%3C/svg%3E") 10 10, auto;
-}
- 
-/* ================================================================
-   ✦ SCROLLBAR
-================================================================ */
-::-webkit-scrollbar { width:8px; }
-::-webkit-scrollbar-track { background: var(--pink-pale); }
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--pink-hot), var(--rose-gold));
-  border-radius:20px;
-}
- 
-/* ================================================================
-   ✦ FONDO ANIMADO
-================================================================ */
-#bg {
-  position:fixed; inset:0; z-index:0;
-  pointer-events:none; overflow:hidden;
-  background: linear-gradient(135deg, #ffe0ef 0%, #fff4fa 40%, #ffeef8 70%, #fff0e8 100%);
-}
- 
-.bg-blob {
-  position:absolute; border-radius:50%;
-  filter:blur(80px); opacity:.35;
-  animation:blobDrift 20s ease-in-out infinite;
-}
-.b1 { width:700px;height:700px;background:radial-gradient(#ffb3d9,#ff8ec8); top:-200px;left:-150px;animation-duration:22s; }
-.b2 { width:500px;height:500px;background:radial-gradient(#e8b4a0,#f0d0c0); top:40%;right:-100px;animation-duration:18s;animation-delay:-9s; }
-.b3 { width:400px;height:400px;background:radial-gradient(#f0d8f8,#e0c8f0); bottom:5%;left:30%;animation-duration:25s;animation-delay:-5s; }
-.b4 { width:350px;height:350px;background:radial-gradient(#ffe8b0,#ffd890); bottom:-80px;right:30%;animation-duration:28s;animation-delay:-14s; }
- 
-@keyframes blobDrift {
-  0%,100% { transform:translate(0,0) scale(1) rotate(0deg); }
-  25%      { transform:translate(40px,-50px) scale(1.08) rotate(5deg); }
-  50%      { transform:translate(-30px,40px) scale(.94) rotate(-3deg); }
-  75%      { transform:translate(50px,25px) scale(1.04) rotate(4deg); }
-}
- 
-/* Sparkles */
-.sparkle-field {
-  position:fixed; inset:0; z-index:0; pointer-events:none;
-}
-.sp {
-  position:absolute; border-radius:50%;
-  animation:spTwinkle 3s ease-in-out infinite;
-  background:var(--gold);
-}
-@keyframes spTwinkle {
-  0%,100% { opacity:0; transform:scale(0.4); }
-  50%      { opacity:.7; transform:scale(1); }
-}
- 
-/* ================================================================
-   ✦ LAYOUT PRINCIPAL
-================================================================ */
-#site { position:relative; z-index:1; }
- 
-/* ================================================================
-   ✦ HEADER
-================================================================ */
-#header {
-  position:sticky; top:0; z-index:200;
-  background:rgba(255,240,250,0.82);
-  backdrop-filter:blur(22px) saturate(1.6);
-  -webkit-backdrop-filter:blur(22px) saturate(1.6);
-  border-bottom: 2px solid rgba(255,160,210,0.3);
-  box-shadow: 0 4px 30px rgba(255,110,180,0.15);
-}
- 
-.header-in {
-  max-width:1300px; margin:0 auto;
-  padding:0 24px; height:70px;
-  display:flex; align-items:center; gap:20px;
-}
- 
-.site-title {
-  font-family:var(--ff-title);
-  font-size:1.7rem;
-  background:linear-gradient(135deg, var(--pink-hot), var(--rose-gold), var(--gold));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text;
-  text-decoration:none;
-  filter:drop-shadow(0 2px 8px rgba(255,110,180,0.3));
-  flex-shrink:0;
-}
- 
-.header-nav {
-  display:flex; align-items:center; gap:4px; flex:1; justify-content:center;
-}
- 
-.hn-btn {
-  padding:8px 18px; border-radius:var(--r-pill);
-  font-family:var(--ff-head); font-size:.83rem; font-weight:600;
-  color:var(--text-mid); background:transparent; border:none;
-  cursor:pointer; transition:var(--ease); text-decoration:none;
-  display:flex; align-items:center; gap:6px;
-}
-.hn-btn:hover, .hn-btn.on {
-  background:linear-gradient(135deg,rgba(255,110,180,.18),rgba(212,144,122,.12));
-  color:var(--pink-hot);
-}
-.hn-btn i { font-size:.82rem; }
- 
-.hdr-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
- 
-.btn-gloss {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:9px 20px; border-radius:var(--r-pill);
-  font-family:var(--ff-head); font-size:.82rem; font-weight:700;
-  cursor:pointer; border:none; transition:var(--ease);
-  position:relative; overflow:hidden;
-}
-.btn-gloss::after {
-  content:'';position:absolute;top:0;left:0;right:0;height:48%;
-  background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);
-  pointer-events:none;
-}
-.btn-pink {
-  background:linear-gradient(135deg, var(--pink-hot), var(--pink-mid));
-  color:#fff;
-  box-shadow:0 4px 18px rgba(255,110,180,.45);
-}
-.btn-pink:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(255,110,180,.55); }
- 
-.btn-ghost {
-  background:rgba(255,220,240,.5);
-  color:var(--text-mid);
-  border:1.5px solid rgba(255,160,210,.35);
-}
-.btn-ghost:hover { background:rgba(255,180,220,.4); color:var(--pink-hot); }
- 
-/* ================================================================
-   ✦ HERO / INTRO
-================================================================ */
-#hero {
-  padding:60px 24px 0;
-  max-width:1300px; margin:0 auto;
-  display:grid; grid-template-columns:1fr 1.1fr;
-  gap:40px; align-items:center;
-}
- 
-.hero-text { }
-.hero-eyebrow {
-  display:inline-flex; align-items:center; gap:7px;
-  background:rgba(255,200,227,.4);
-  border:1.5px solid rgba(255,150,200,.35);
-  border-radius:var(--r-pill);
-  padding:5px 16px; font-size:.78rem; font-weight:700;
-  color:var(--pink-hot); letter-spacing:.5px;
-  margin-bottom:16px;
-  font-family:var(--ff-head);
-}
- 
-.hero-name {
-  font-family:var(--ff-title);
-  font-size:clamp(2.4rem,5vw,3.8rem);
-  line-height:1.15;
-  background:linear-gradient(135deg,var(--pink-hot) 0%,var(--rose-gold) 50%,var(--gold) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text;
-  filter:drop-shadow(0 3px 12px rgba(255,110,180,.25));
-  margin-bottom:10px;
-}
- 
-.hero-tagline {
-  font-size:1.1rem; color:var(--text-mid);
-  font-style:italic; margin-bottom:22px; line-height:1.6;
-}
- 
-.hero-status-bubble {
-  display:inline-flex; align-items:center; gap:10px;
-  background:var(--glass);
-  border:1.5px solid var(--glass-border);
-  border-radius:var(--r-lg);
-  padding:12px 18px;
-  backdrop-filter:blur(12px);
-  box-shadow:var(--shadow-pink);
-  margin-bottom:24px;
-  font-size:.88rem; color:var(--text-mid);
-  font-weight:600; font-family:var(--ff-head);
-}
-.status-dot {
-  width:10px;height:10px;border-radius:50%;
-  background:#7de8a8;
-  box-shadow:0 0 8px rgba(100,220,140,.6);
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.35);} }
- 
-.hero-btns { display:flex; gap:10px; flex-wrap:wrap; }
- 
-/* Profile card */
-.hero-profile {
-  position:relative;
-  display:flex; flex-direction:column; align-items:center;
-}
- 
-.profile-frame {
-  width:260px; height:260px;
-  border-radius:50%;
-  position:relative;
-  flex-shrink:0;
-}
- 
-.profile-ring {
-  position:absolute; inset:-6px;
-  border-radius:50%;
-  background:conic-gradient(
-    var(--pink-hot), var(--rose-gold), var(--gold),
-    var(--pink-soft), var(--pink-hot)
-  );
-  animation:ringRotate 4s linear infinite;
-  z-index:-1;
-}
-@keyframes ringRotate { to { transform:rotate(360deg); } }
- 
-.profile-img {
-  width:100%; height:100%;
-  border-radius:50%; object-fit:cover;
-  border:6px solid var(--white-warm);
-  background:linear-gradient(135deg, var(--pink-pale), var(--purple-soft));
-  display:flex; align-items:center; justify-content:center;
-  font-size:80px;
-  box-shadow:0 8px 40px rgba(255,110,180,.3);
-}
- 
-.profile-badge {
-  position:absolute; bottom:10px; right:10px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-light));
-  border:3px solid #fff;
-  border-radius:50%; width:46px; height:46px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.3rem;
-  box-shadow:0 4px 16px rgba(240,192,96,.4);
-}
- 
-.hero-name-under {
-  font-family:var(--ff-title); font-size:1.3rem;
-  background:linear-gradient(135deg,var(--pink-hot),var(--rose-gold));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text; margin-top:16px;
-}
-.hero-handle { font-size:.82rem; color:var(--text-soft); }
- 
-/* ================================================================
-   ✦ GRID PRINCIPAL
-================================================================ */
-.main-grid {
-  max-width:1300px; margin:50px auto 0;
-  padding:0 24px 60px;
-  display:grid;
-  grid-template-columns:290px 1fr 280px;
-  gap:24px;
-  align-items:start;
-}
- 
-/* ================================================================
-   ✦ GLASS CARD BASE
-================================================================ */
-.card {
-  background:var(--glass);
-  backdrop-filter:blur(18px) saturate(1.5);
-  -webkit-backdrop-filter:blur(18px) saturate(1.5);
-  border:1.5px solid var(--glass-border);
-  border-radius:var(--r-xl);
-  box-shadow:var(--shadow-pink);
-  overflow:hidden;
-  transition:var(--ease);
-}
-.card:hover { box-shadow:var(--shadow-deep); transform:translateY(-2px); }
- 
-.card-head {
-  padding:16px 20px 0;
-  display:flex; align-items:center; gap:9px;
-  font-family:var(--ff-head); font-size:.82rem; font-weight:700;
-  color:var(--text-mid); text-transform:uppercase; letter-spacing:.8px;
-}
-.card-head i { color:var(--pink-hot); font-size:.9rem; }
-.card-body { padding:16px 20px 20px; }
- 
-.sec-title {
-  font-family:var(--ff-title); font-size:1.3rem;
-  background:linear-gradient(135deg,var(--pink-hot),var(--rose-gold));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text; margin-bottom:14px;
-}
- 
-/* ================================================================
-   ✦ LEFT SIDEBAR
-================================================================ */
-.left-col { display:flex; flex-direction:column; gap:18px;
-  position:sticky; top:88px; }
- 
-/* About me */
-.about-grid {
-  display:grid; grid-template-columns:1fr 1fr; gap:8px;
-}
-.about-chip {
-  background:rgba(255,200,230,.35); border:1px solid rgba(255,160,210,.3);
-  border-radius:var(--r-md); padding:8px 10px;
-  font-size:.78rem; color:var(--text-mid); font-weight:600;
-  display:flex; align-items:center; gap:5px;
-  transition:var(--ease);
-}
-.about-chip:hover { background:rgba(255,160,210,.45); transform:scale(1.03); }
- 
-.about-chip-full {
-  grid-column:1/-1;
-  background:rgba(240,208,248,.3); border-color:rgba(200,160,240,.3);
-}
- 
-/* Favorites list */
-.fav-list { display:flex; flex-direction:column; gap:8px; }
-.fav-item {
-  display:flex; align-items:center; gap:10px;
-  padding:9px 12px; border-radius:var(--r-md);
-  background:rgba(255,220,240,.3); border:1px solid rgba(255,180,220,.25);
-  font-size:.82rem; color:var(--text-mid); font-weight:600;
-  transition:var(--ease); cursor:default;
-}
-.fav-item:hover { background:rgba(255,180,220,.45); transform:translateX(4px); }
-.fav-item i { color:var(--pink-hot); font-size:.85rem; width:16px; text-align:center; }
- 
-/* ================================================================
-   ✦ CENTER COLUMN
-================================================================ */
-.center-col { display:flex; flex-direction:column; gap:22px; }
- 
-/* Scrapbook feed */
-.scrap-grid {
-  display:grid; gap:16px;
-}
- 
-.scrap-post {
-  background:rgba(255,255,255,.65);
-  border:1.5px solid rgba(255,180,220,.3);
-  border-radius:var(--r-xl);
-  overflow:hidden;
-  box-shadow:0 4px 24px rgba(255,110,180,.1);
-  transition:var(--ease);
-  animation:slideUp .4s ease both;
-}
-.scrap-post:hover { box-shadow:0 10px 40px rgba(255,110,180,.22); transform:translateY(-3px); }
- 
-@keyframes slideUp {
-  from { opacity:0; transform:translateY(22px); }
-  to   { opacity:1; transform:translateY(0); }
-}
- 
-.post-tape {
-  display:flex; justify-content:flex-end; padding:0 16px;
-  margin-top:-2px; margin-bottom:-8px; position:relative; z-index:1;
-}
-.tape {
-  width:40px; height:18px;
-  background:rgba(255,200,100,.5);
-  border-radius:3px;
-  box-shadow:0 2px 6px rgba(200,160,60,.25);
-}
- 
-.post-inner { padding:18px 20px 16px; }
- 
-.post-hdr {
-  display:flex; align-items:center; gap:10px; margin-bottom:12px;
-}
-.post-ava {
-  width:38px;height:38px; border-radius:50%;
-  background:linear-gradient(135deg,var(--pink-hot),var(--rose-gold));
-  display:flex; align-items:center; justify-content:center;
-  font-size:16px; flex-shrink:0;
-  box-shadow:0 3px 12px rgba(255,110,180,.25);
-}
-.post-who { font-family:var(--ff-head); font-size:.95rem; font-weight:700; color:var(--text-dark); }
-.post-when { font-size:.7rem; color:var(--text-soft); }
-.post-type-badge {
-  margin-left:auto; padding:3px 10px; border-radius:var(--r-pill);
-  font-size:.68rem; font-weight:700; font-family:var(--ff-head);
-  text-transform:uppercase; letter-spacing:.5px;
-}
-.badge-thought { background:rgba(255,200,230,.5); color:var(--pink-hot); }
-.badge-photo   { background:rgba(212,144,122,.2);  color:var(--rose-gold); }
-.badge-quote   { background:rgba(240,192,96,.2);   color:#b08000; }
-.badge-music   { background:rgba(200,160,240,.3);  color:#8040c0; }
- 
-.post-body {
-  font-size:.9rem; color:var(--text-mid); line-height:1.7; margin-bottom:12px;
-}
-.post-body.is-quote {
-  font-style:italic; font-size:1rem; color:var(--rose-gold);
-  border-left:3px solid var(--pink-soft); padding-left:12px;
-}
- 
-.post-img-wrap {
-  border-radius:var(--r-lg); overflow:hidden; margin-bottom:12px;
-  position:relative;
-}
-.post-img {
-  width:100%; max-height:360px; object-fit:cover; display:block;
-  transition:transform .5s ease;
-}
-.post-img-wrap:hover .post-img { transform:scale(1.04); }
- 
-.post-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
-.ptag {
-  padding:3px 10px; border-radius:var(--r-pill);
-  background:rgba(255,200,230,.4); border:1px solid rgba(255,160,210,.3);
-  font-size:.7rem; color:var(--pink-hot); font-weight:700;
-}
- 
-.post-foot {
-  display:flex; gap:6px; flex-wrap:wrap; align-items:center;
-  padding-top:10px; border-top:1px solid rgba(255,180,210,.15);
-}
-.react-btn {
-  display:flex; align-items:center; gap:5px;
-  padding:5px 13px; border-radius:var(--r-pill);
-  background:rgba(255,240,248,.5); border:1.5px solid rgba(255,180,220,.25);
-  font-size:.78rem; font-family:var(--ff-body); font-weight:600;
-  color:var(--text-soft); cursor:pointer; transition:var(--ease);
-}
-.react-btn:hover,.react-btn.on {
-  background:rgba(255,180,220,.4); border-color:var(--pink-soft);
-  color:var(--pink-hot); transform:scale(1.05);
-}
-.react-btn.on .rh { animation:heartPop .35s ease; }
-@keyframes heartPop {
-  0%{transform:scale(1)} 50%{transform:scale(1.5)} 100%{transform:scale(1)}
-}
- 
-/* Comments toggle */
-.comments-wrap {
-  padding:12px 20px 16px;
-  border-top:1px solid rgba(255,180,210,.15);
-  background:rgba(255,245,250,.5);
-  display:none;
-}
-.comments-wrap.open { display:block; animation:fadeIn .25s ease; }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
- 
-.cmt-list { display:flex; flex-direction:column; gap:10px; margin-bottom:12px; }
-.cmt-item { display:flex; gap:8px; animation:slideUp .3s ease; }
-.cmt-ava {
-  width:28px;height:28px;border-radius:50%;
-  background:linear-gradient(135deg,var(--pink-soft),var(--rose-shine));
-  display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;
-}
-.cmt-bubble {
-  background:rgba(255,240,248,.7); border:1px solid rgba(255,180,220,.25);
-  border-radius:4px var(--r-lg) var(--r-lg) var(--r-lg);
-  padding:7px 12px; flex:1;
-}
-.cmt-who { font-size:.72rem; font-weight:700; color:var(--pink-hot); margin-bottom:2px; }
-.cmt-txt { font-size:.78rem; color:var(--text-mid); line-height:1.5; }
- 
-.cmt-input-row { display:flex; gap:7px; align-items:center; }
-.cmt-input {
-  flex:1; border:1.5px solid rgba(255,180,220,.35);
-  border-radius:var(--r-pill); padding:8px 14px;
-  font-family:var(--ff-body); font-size:.8rem; color:var(--text-dark);
-  background:rgba(255,255,255,.7); outline:none; transition:var(--ease);
-}
-.cmt-input:focus { border-color:var(--pink-hot); box-shadow:0 0 0 3px rgba(255,110,180,.15); }
-.cmt-input::placeholder { color:var(--text-soft); }
-.cmt-send {
-  width:34px;height:34px;border-radius:50%;
-  background:linear-gradient(135deg,var(--pink-hot),var(--pink-mid));
-  border:none;color:#fff;font-size:.78rem;cursor:pointer;
-  transition:var(--ease); display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.cmt-send:hover { transform:scale(1.12); box-shadow:0 4px 14px rgba(255,110,180,.4); }
- 
-/* ================================================================
-   ✦ MUSIC SECTION
-================================================================ */
-.music-list { display:flex; flex-direction:column; gap:10px; }
-.music-item {
-  display:flex; align-items:center; gap:12px;
-  padding:10px 14px; border-radius:var(--r-lg);
-  background:rgba(255,220,240,.35); border:1px solid rgba(255,180,220,.25);
-  transition:var(--ease); cursor:default; position:relative; overflow:hidden;
-}
-.music-item::before {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
-  transform:translateX(-100%); transition:transform .5s ease;
-}
-.music-item:hover::before { transform:translateX(100%); }
-.music-item:hover { background:rgba(255,180,220,.45); transform:translateX(4px); }
- 
-.music-cover {
-  width:44px;height:44px;border-radius:var(--r-sm);
-  background:linear-gradient(135deg,var(--pink-hot),var(--rose-gold));
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem; flex-shrink:0;
-  box-shadow:0 3px 10px rgba(255,110,180,.25);
-}
-.music-info { flex:1; }
-.music-title { font-size:.85rem; font-weight:700; color:var(--text-dark); }
-.music-artist { font-size:.74rem; color:var(--text-soft); }
-.music-badge {
-  padding:3px 9px; border-radius:var(--r-pill);
-  font-size:.66rem; font-weight:700; font-family:var(--ff-head);
-  background:rgba(200,160,240,.3); color:#7030b0;
-}
- 
-/* ================================================================
-   ✦ VIDEOS SECTION
-================================================================ */
-.videos-grid {
-  display:grid; grid-template-columns:1fr 1fr; gap:12px;
-}
-.video-card {
-  border-radius:var(--r-lg); overflow:hidden;
-  background:rgba(255,220,240,.3); border:1px solid rgba(255,180,220,.25);
-  transition:var(--ease); cursor:pointer; position:relative;
-}
-.video-card:hover { transform:scale(1.03); box-shadow:0 8px 24px rgba(255,110,180,.2); }
-.video-thumb {
-  aspect-ratio:16/9; background:linear-gradient(135deg,var(--pink-soft),var(--purple-soft));
-  display:flex;align-items:center;justify-content:center;
-  font-size:2rem; position:relative;
-}
-.play-btn-overlay {
-  position:absolute; inset:0;
-  background:rgba(255,110,180,.25);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0; transition:var(--ease);
-}
-.video-card:hover .play-btn-overlay { opacity:1; }
-.play-icon {
-  width:40px;height:40px;border-radius:50%;
-  background:rgba(255,255,255,.9);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--pink-hot); font-size:1.1rem;
-}
-.video-info { padding:8px 10px 10px; }
-.video-title { font-size:.78rem; font-weight:700; color:var(--text-dark); }
-.video-sub { font-size:.68rem; color:var(--text-soft); }
- 
-/* ================================================================
-   ✦ RIGHT SIDEBAR — PEARPHONE + GUESTBOOK
-================================================================ */
-.right-col { display:flex; flex-direction:column; gap:18px;
-  position:sticky; top:88px; }
- 
-/* PearPhone */
-.pearphone-wrap { padding:18px; display:flex; flex-direction:column; align-items:center; }
-.pp-label {
-  font-family:var(--ff-head); font-size:.8rem; font-weight:700;
-  color:var(--text-soft); letter-spacing:1px; text-transform:uppercase;
-  margin-bottom:14px;
-}
-.pearphone {
-  width:100%; max-width:230px;
-  background:linear-gradient(160deg,#1e0e18,#160a12,#200e18);
-  border-radius:38px; padding:12px 9px;
-  box-shadow:
-    0 24px 70px rgba(80,20,60,.6),
-    0 0 0 1.5px rgba(255,150,200,.12),
-    inset 0 1px 0 rgba(255,255,255,.07),
-    inset 0 -1px 0 rgba(0,0,0,.4);
-  position:relative;
-}
-.pp-notch {
-  width:70px;height:6px; background:rgba(255,255,255,.06);
-  border-radius:3px; margin:0 auto 8px;
-}
-.pp-screen {
-  background:linear-gradient(160deg,#180c14,#1e1018);
-  border-radius:30px; overflow:hidden;
-}
-.pp-topbar {
-  background:rgba(255,100,180,.1);
-  padding:7px 14px; display:flex; justify-content:space-between; align-items:center;
-  border-bottom:1px solid rgba(255,100,180,.08);
-}
-.pp-brand {
-  font-family:var(--ff-title); font-size:.72rem;
-  background:linear-gradient(135deg,var(--pink-hot),var(--gold));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text; letter-spacing:.5px;
-}
-.pp-icons { color:rgba(255,150,200,.65); font-size:.58rem; display:flex; gap:4px; }
- 
-.pp-states-area {
-  padding:12px 10px; min-height:190px; max-height:260px;
-  overflow-y:auto; display:flex; flex-direction:column; gap:8px;
-  scrollbar-width:none;
-}
-.pp-states-area::-webkit-scrollbar { display:none; }
- 
-.pp-state-bubble {
-  background:rgba(255,100,180,.18); border:1px solid rgba(255,120,190,.18);
-  border-radius:12px 12px 12px 4px;
-  padding:8px 11px; max-width:90%;
-  font-size:.69rem; line-height:1.5;
-  color:rgba(255,220,235,.9); animation:fadeIn .3s ease;
-}
-.pp-state-meta { font-size:.58rem; opacity:.5; margin-top:3px; }
- 
-.pp-input-row {
-  padding:8px 9px; border-top:1px solid rgba(255,100,180,.1);
-  display:flex; gap:6px; align-items:center;
-}
-.pp-input {
-  flex:1; background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,150,200,.2); border-radius:var(--r-pill);
-  padding:6px 11px; font-family:var(--ff-body); font-size:.68rem;
-  color:rgba(255,220,235,.9); outline:none; transition:var(--ease);
-}
-.pp-input:focus { border-color:rgba(255,110,180,.45); }
-.pp-input::placeholder { color:rgba(180,100,140,.5); }
-.pp-send {
-  width:28px;height:28px;border-radius:50%;
-  background:linear-gradient(135deg,var(--pink-hot),var(--rose-gold));
-  border:none;color:#fff;font-size:.66rem;
-  cursor:pointer;transition:var(--ease);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.pp-send:hover { transform:scale(1.15); }
-.pp-footer-brand {
-  text-align:center; padding:7px;
-  font-family:var(--ff-title); font-size:.6rem;
-  background:linear-gradient(135deg,var(--rose-gold),var(--gold));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text; letter-spacing:1px;
-}
- 
-/* ================================================================
-   ✦ GUESTBOOK
-================================================================ */
-.guestbook-list { display:flex; flex-direction:column; gap:10px; margin-bottom:12px; }
-.gb-entry {
-  background:rgba(255,240,248,.6); border:1px solid rgba(255,180,220,.25);
-  border-radius:var(--r-lg); padding:10px 13px;
-  animation:slideUp .3s ease;
-}
-.gb-who {
-  font-size:.75rem; font-weight:700; color:var(--pink-hot);
-  margin-bottom:3px; display:flex; align-items:center; gap:5px;
-}
-.gb-msg { font-size:.78rem; color:var(--text-mid); line-height:1.5; }
-.gb-when { font-size:.64rem; color:var(--text-soft); margin-top:4px; }
- 
-.gb-form { display:flex; flex-direction:column; gap:8px; }
-.gb-name-input, .gb-msg-input {
-  border:1.5px solid rgba(255,180,220,.35); border-radius:var(--r-md);
-  padding:8px 12px; font-family:var(--ff-body); font-size:.8rem;
-  color:var(--text-dark); background:rgba(255,255,255,.7); outline:none;
-  transition:var(--ease);
-}
-.gb-name-input:focus,.gb-msg-input:focus {
-  border-color:var(--pink-hot); box-shadow:0 0 0 3px rgba(255,110,180,.12);
-}
-.gb-name-input::placeholder,.gb-msg-input::placeholder { color:var(--text-soft); }
-.gb-msg-input { resize:none; height:60px; border-radius:var(--r-md); }
- 
-/* Visitor reactions section */
-.reactions-bar {
-  display:flex; flex-wrap:wrap; gap:7px; justify-content:center;
-}
-.big-react {
-  display:flex; flex-direction:column; align-items:center; gap:4px;
-  padding:10px 14px; border-radius:var(--r-lg);
-  background:rgba(255,230,245,.5); border:1.5px solid rgba(255,180,220,.3);
-  cursor:pointer; transition:var(--ease);
-  font-family:var(--ff-head); font-size:.72rem; font-weight:700; color:var(--text-mid);
-}
-.big-react:hover { background:rgba(255,180,220,.45); transform:scale(1.08); color:var(--pink-hot); }
-.big-react .emoji { font-size:1.5rem; }
-.big-react.bumped { animation:bumpIt .4s ease; }
-@keyframes bumpIt {
-  0%{transform:scale(1)} 40%{transform:scale(1.35)} 100%{transform:scale(1)}
-}
- 
-/* Visitor image upload */
-.visit-img-area {
-  border:2px dashed rgba(255,160,210,.4); border-radius:var(--r-lg);
-  padding:20px; text-align:center; cursor:pointer;
-  transition:var(--ease); background:rgba(255,240,248,.4);
-}
-.visit-img-area:hover {
-  border-color:var(--pink-hot); background:rgba(255,200,230,.25);
-}
-.visit-img-area p { font-size:.8rem; color:var(--text-soft); margin-top:6px; }
-.visit-img-preview {
-  display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:10px;
-}
-.visit-img-preview img {
-  width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--r-sm);
-  border:2px solid rgba(255,180,220,.3);
-}
- 
-/* ================================================================
-   ✦ TOAST
-================================================================ */
-#toasts {
-  position:fixed; bottom:24px; right:24px; z-index:9999;
-  display:flex; flex-direction:column; gap:8px; pointer-events:none;
-}
-.toast {
-  background:rgba(255,252,254,.95); backdrop-filter:blur(16px);
-  border:1.5px solid rgba(255,180,220,.35); border-radius:var(--r-xl);
-  padding:11px 18px; box-shadow:0 8px 32px rgba(255,110,180,.22);
-  display:flex; align-items:center; gap:9px;
-  min-width:210px; pointer-events:all;
-  animation:toastIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
-}
-.toast.out { animation:toastOut .3s ease forwards; }
-@keyframes toastIn {
-  from{opacity:0;transform:translateX(90px) scale(.85)}
-  to{opacity:1;transform:translateX(0) scale(1)}
-}
-@keyframes toastOut {
-  from{opacity:1;transform:translateX(0) scale(1)}
-  to{opacity:0;transform:translateX(90px) scale(.85)}
-}
-.toast-ico { font-size:1.1rem; }
-.toast-txt { font-size:.8rem; color:var(--text-mid); font-weight:600; font-family:var(--ff-head); }
- 
-/* ================================================================
-   ✦ MODAL
-================================================================ */
-.modal-bg {
-  position:fixed;inset:0;z-index:500;
-  background:rgba(80,20,50,.55); backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;
-  animation:fadeIn .25s ease;
-}
-.modal-box {
-  background:var(--white-warm); border-radius:var(--r-xl);
-  padding:28px; max-width:500px; width:93%;
-  box-shadow:0 24px 80px rgba(200,60,120,.3);
-  animation:slideUp .3s ease;
-}
-.modal-title { font-family:var(--ff-title); font-size:1.3rem; color:var(--pink-hot); margin-bottom:16px; }
-.modal-input {
-  width:100%; border:1.5px solid rgba(255,180,220,.4); border-radius:var(--r-md);
-  padding:10px 14px; font-family:var(--ff-body); font-size:.87rem;
-  color:var(--text-dark); background:rgba(255,248,252,.8); outline:none;
-  margin-bottom:10px; transition:var(--ease);
-}
-.modal-input:focus { border-color:var(--pink-hot); }
-.modal-btns { display:flex; gap:10px; justify-content:flex-end; margin-top:6px; }
- 
-/* ================================================================
-   ✦ SECTION DIVIDER
-================================================================ */
-.divider {
-  display:flex;align-items:center;gap:12px;margin:8px 0;
-}
-.dline { flex:1;height:1.5px;background:linear-gradient(90deg,transparent,rgba(255,180,220,.4),transparent); }
-.dico { color:var(--pink-hot); font-size:.9rem; }
- 
-/* ================================================================
-   ✦ FOOTER
-================================================================ */
-#footer {
-  background:rgba(255,230,245,.5);
-  border-top:1.5px solid rgba(255,180,210,.2);
-  margin-top:20px;
-}
-.footer-in {
-  max-width:1300px;margin:0 auto;padding:28px 24px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;
-}
-.footer-logo { font-family:var(--ff-title); font-size:1.2rem;
-  background:linear-gradient(135deg,var(--pink-hot),var(--rose-gold));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
-.footer-txt { font-size:.75rem; color:var(--text-soft); }
-.footer-links { display:flex;gap:14px; }
-.footer-link { font-size:.75rem;color:var(--text-soft);text-decoration:none;transition:var(--ease); }
-.footer-link:hover { color:var(--pink-hot); }
- 
-/* ================================================================
-   ✦ UTILITIES
-================================================================ */
-.mt-0 { margin-top:0!important; }
-.mt-12 { margin-top:12px; }
-.mt-16 { margin-top:16px; }
-.w100 { width:100%; }
- 
-/* ================================================================
-   ✦ RESPONSIVE
-================================================================ */
-@media(max-width:1100px){
-  .main-grid { grid-template-columns:260px 1fr; }
-  .right-col { display:none; }
-}
-@media(max-width:768px){
-  #hero { grid-template-columns:1fr; text-align:center; }
-  .hero-profile { display:none; }
-  .main-grid { grid-template-columns:1fr; }
-  .left-col { position:static; }
-  .header-nav .hn-btn span { display:none; }
-  .videos-grid { grid-template-columns:1fr; }
-}
-@media(max-width:480px){
-  .site-title { font-size:1.3rem; }
-  #hero { padding:40px 16px 0; }
-  .main-grid { padding:0 16px 40px; }
-}
- 
-/* Glitter particle */
-.glitter {
-  position:fixed; pointer-events:none; z-index:999;
-  width:6px; height:6px; border-radius:50%;
-  animation:glitterFly .8s ease forwards;
-}
-@keyframes glitterFly {
-  0%   { opacity:1; transform:translate(0,0) scale(1); }
-  100% { opacity:0; transform:translate(var(--gx),var(--gy)) scale(.3); }
-}
- 
-/* Admin badge */
-.admin-badge {
-  display:inline-flex;align-items:center;gap:4px;
-  padding:2px 8px; border-radius:var(--r-pill);
-  background:linear-gradient(135deg,var(--gold),var(--gold-light));
-  font-size:.62rem; font-weight:700; color:#704000;
-  font-family:var(--ff-head);
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ✨ CAMBIA EL TÍTULO DE LA PESTAÑA DEL NAVEGADOR AQUÍ -->
+  <title> Riri ᥫ᭡ </title>
+
+  <!-- =====================================================
+       FUENTES DE GOOGLE FONTS
+       Playfair Display = elegante y romántica (para títulos)
+       Lora = serif refinada (para el cuerpo del texto)
+       Dancing Script = cursiva girly (para detalles especiales)
+  ===================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Enlace al archivo de estilos CSS -->
+  <link rel="stylesheet" href="./CSS/style.css" />
 </head>
- 
+
 <body>
- 
-<!-- ============================================================
-     ✦ FONDO ANIMADO
-============================================================ -->
-<div id="bg" aria-hidden="true">
-  <div class="bg-blob b1"></div>
-  <div class="bg-blob b2"></div>
-  <div class="bg-blob b3"></div>
-  <div class="bg-blob b4"></div>
-</div>
-<div class="sparkle-field" id="sparkles" aria-hidden="true"></div>
- 
-<!-- ============================================================
-     ✦ TOASTS
-============================================================ -->
-<div id="toasts" aria-live="polite"></div>
- 
-<!-- ============================================================
-     ✦ SITE WRAPPER
-============================================================ -->
-<div id="site">
- 
-<!-- ============================================================
-     ✦ HEADER
-============================================================ -->
-<header id="header">
-  <div class="header-in">
-    <a class="site-title" href="#hero" aria-label="Inicio">✦ mi cuartito ✦</a>
-    <nav class="header-nav" aria-label="Navegación">
-      <button class="hn-btn on" onclick="scrollTo('hero',this)"><i class="fa-solid fa-house"></i><span>inicio</span></button>
-      <button class="hn-btn" onclick="scrollTo('about',this)"><i class="fa-solid fa-user"></i><span>sobre mí</span></button>
-      <button class="hn-btn" onclick="scrollTo('feed',this)"><i class="fa-solid fa-pen-nib"></i><span>feed</span></button>
-      <button class="hn-btn" onclick="scrollTo('music',this)"><i class="fa-solid fa-music"></i><span>música</span></button>
-      <button class="hn-btn" onclick="scrollTo('videos',this)"><i class="fa-solid fa-film"></i><span>videos</span></button>
-      <button class="hn-btn" onclick="scrollTo('guestbook',this)"><i class="fa-solid fa-book-open"></i><span>libro de visitas</span></button>
-    </nav>
-    <div class="hdr-right">
-      <button class="btn-gloss btn-ghost" onclick="showVisitorModal()">
-        <i class="fa-solid fa-comment-dots"></i> dejar mensaje
-      </button>
+
+  <!-- =====================================================
+       FONDO DECORATIVO CON PARTÍCULAS (JS lo activa)
+       No toques esto — script.js genera los corazoncitos ✿
+  ===================================================== -->
+  <div id="sparkles-container" aria-hidden="true"></div>
+
+  <!-- =====================================================
+       PANTALLA DE CARGA (se oculta automáticamente)
+       Aparece por 1.5 segundos al entrar a la página
+  ===================================================== -->
+  <div id="loading-screen">
+    <div class="loading-inner">
+      <div class="loading-heart">♡</div>
+      <!-- CAMBIA ESTE TEXTO SI QUIERES OTRO MENSAJE DE BIENVENIDA -->
+      <p>entrando a ᥫ᭡ ...</p>
     </div>
   </div>
-</header>
- 
-<!-- ============================================================
-     ✦ HERO
-============================================================ -->
-<section id="hero" style="padding-bottom:30px;">
-  <div style="max-width:1300px;margin:0 auto;padding:60px 24px 0;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;">
- 
-    <div class="hero-text">
-      <div class="hero-eyebrow">✦ bienvenid@ a mi espacio ✦</div>
-      <!-- ✦ ADMIN: cambia tu nombre aquí -->
-      <h1 class="hero-name" id="hero-name">hola, soy Cami!</h1>
-      <!-- ✦ ADMIN: cambia tu tagline aquí -->
-      <p class="hero-tagline" id="hero-tagline">"creativa, soñadora y coleccionista de momentos bonitos ✨"</p>
- 
-      <!-- Estado personal (solo admin puede poner desde PearPhone) -->
-      <div class="hero-status-bubble" id="hero-status">
-        <div class="status-dot"></div>
-        <span id="hero-status-text">✿ actualmente: escuchando música y soñando despierta</span>
+
+  <!-- =====================================================
+       CONTENEDOR PRINCIPAL DE TODA LA PÁGINA
+  ===================================================== -->
+  <div id="page-wrapper" class="fade-in-page">
+
+    <!-- ===================================================
+         HEADER / ENCABEZADO PRINCIPAL
+         Tu nombre, frase y decoración de estrella
+    =================================================== -->
+    <header class="site-header">
+      <!-- Corazones decorativos (puramente visual) -->
+      <div class="header-deco left" aria-hidden="true">⚝❀✧</div>
+      <div class="header-deco right" aria-hidden="true">⚝❀✧</div>
+
+      <div class="header-content">
+        <!-- CAMBIA ESTE TEXTO POR TU NOMBRE -->
+        <h1 class="site-title">mi tablero ღ</h1>
+        <!-- CAMBIA ESTA FRASE POR LA TUYA -->
+        <p class="site-subtitle">"All Might was my hero but you were the one actually in my life"</p>
+
+        <!-- Mini barra de navegación / etiquetas -->
+        <nav class="header-nav" aria-label="Navegación principal">
+          <a href="#music-section">♪ música</a>
+          <a href="#photo-section">❟❛❟ fotos</a>
+          <a href="#notes-section">✎ notas</a>
+          <a href="#books-section">ꕤ libros</a>
+        </nav>
       </div>
- 
-      <div class="hero-btns">
-        <button class="btn-gloss btn-pink" onclick="scrollTo('feed',null)">
-          <i class="fa-solid fa-pen-nib"></i> ver mi feed
-        </button>
-        <button class="btn-gloss btn-ghost" onclick="scrollTo('guestbook',null)">
-          <i class="fa-solid fa-heart"></i> firmar mi libro
-        </button>
-      </div>
-    </div>
- 
-    <div class="hero-profile">
-      <div class="profile-frame">
-        <div class="profile-ring"></div>
-        <!-- ✦ ADMIN: reemplaza el emoji por un <img> con tu foto -->
-        <div class="profile-img" id="profile-img">🌸</div>
-        <div class="profile-badge">⭐</div>
-      </div>
-      <!-- ✦ ADMIN: cambia nombre y handle aquí -->
-      <div class="hero-name-under" id="profile-name">Cami</div>
-      <div class="hero-handle">@tucuartito.net · hecha de café y sueños</div>
-    </div>
- 
-  </div>
-</section>
- 
-<!-- ============================================================
-     ✦ MAIN GRID
-============================================================ -->
-<div class="main-grid">
- 
-  <!-- ==========================================
-       ✦ LEFT SIDEBAR
-  ========================================== -->
-  <aside class="left-col">
- 
-    <!-- ABOUT ME -->
-    <div class="card" id="about">
-      <div class="card-head"><i class="fa-solid fa-sparkles"></i> sobre mí</div>
-      <div class="card-body">
-        <div class="divider mt-0"><div class="dline"></div><span class="dico">✦</span><div class="dline"></div></div>
-        <!-- ✦ ADMIN: edita estos chips para representarte -->
-        <div class="about-grid" id="about-chips">
-          <div class="about-chip">🎨 artista</div>
-          <div class="about-chip">📚 lectora</div>
-          <div class="about-chip">☕ cafetera</div>
-          <div class="about-chip">🌙 nocturna</div>
-          <div class="about-chip">🎬 cinéfila</div>
-          <div class="about-chip">🌷 romántica</div>
-          <div class="about-chip about-chip-full">💌 leo · sol en leo, luna en piscis</div>
-          <div class="about-chip about-chip-full">🎵 viviendo en modo playlist</div>
+    </header>
+
+
+    <!-- ===================================================
+         SECCIÓN DE MÚSICA
+         Haz clic en la portada para reproducir/pausar
+    =================================================== -->
+    <section id="music-section" class="section-block">
+      <h2 class="section-title"> Playlist ♪ </h2>
+      <p class="section-subtitle">click en la portada para escuchar</p>
+
+      <div class="music-grid">
+
+        <!--
+          🎵 CÓMO AGREGAR UNA CANCIÓN:
+          1. En data-audio="URL_AQUÍ" pon la URL directa a tu archivo .mp3 u .ogg
+             Ejemplo: data-audio="https://tuservidor.com/cancion.mp3"
+          2. Cambia el src de <img> por la portada del álbum
+          3. Cambia los textos de .music-title y .music-artist
+        -->
+
+        <!-- Canción 1 -->
+        <div class="music-card" data-audio="/music/Måneskin - GOSSIP ft. Tom Morello (LyricsTesto).mp3" role="button" tabindex="0" aria-label="Reproducir canción 1">
+          <div class="album-art-wrapper">
+            <!-- CAMBIA EL src POR LA URL DE LA PORTADA DEL ÁLBUM -->
+            <img src="images/gossip.jpg" alt="Álbum 1" class="album-art" />
+            <div class="play-overlay">
+              <span class="play-icon">▶</span>
+            </div>
+            <!-- Animación de ecualizador (visible cuando suena) -->
+            <div class="equalizer" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <!-- CAMBIA ESTE TEXTO POR EL NOMBRE DE LA CANCIÓN -->
+          <p class="music-title">GOSSIP</p>
+          <!-- CAMBIA ESTE TEXTO POR EL/LA ARTISTA -->
+          <p class="music-artist">Song by Måneskin ‧ 2023</p>
         </div>
- 
-        <div class="divider mt-12"><div class="dline"></div><span class="dico">✿</span><div class="dline"></div></div>
-        <!-- ✦ ADMIN: escribe tu mini bio aquí -->
-        <p style="font-size:.82rem;color:var(--text-mid);line-height:1.7;font-style:italic;margin-bottom:12px;">
-          "hola! me llamo Cami, tengo 20 años y este es mi rinconcito digital. aquí guardo cosas que me gustan, cosas que pienso y momentos que no quiero olvidar 💖"
-        </p>
- 
-        <div class="fav-list">
-          <div class="fav-item"><i class="fa-solid fa-heart"></i> le gusta: las tardes de lluvia</div>
-          <div class="fav-item"><i class="fa-solid fa-star"></i> obsesión actual: Lana Del Rey</div>
-          <div class="fav-item"><i class="fa-solid fa-moon"></i> duermo tarde, vivo tarde</div>
-          <div class="fav-item"><i class="fa-solid fa-palette"></i> colores favoritos: rosa y gold</div>
-          <div class="fav-item"><i class="fa-solid fa-film"></i> pelis: Clueless, Legally Blonde</div>
-          <div class="fav-item"><i class="fa-solid fa-book"></i> libros: cualquiera de Daphne</div>
+
+        <!-- Canción 2 -->
+        <div class="music-card" data-audio="/music/Humbe - Confieso.mp3" role="button" tabindex="0" aria-label="Reproducir canción 2">
+          <div class="album-art-wrapper">
+            <img src="/images/confieso.jpg" alt="Álbum 2" class="album-art" />
+            <div class="play-overlay"><span class="play-icon">▶</span></div>
+            <div class="equalizer" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <p class="music-title">Confieso</p>
+          <p class="music-artist">Song by Humbe ‧ 2021</p>
         </div>
-      </div>
-    </div>
- 
-    <!-- CURRENTLY OBSESSED WITH -->
-    <div class="card">
-      <div class="card-head"><i class="fa-solid fa-fire"></i> obsesionada con</div>
-      <div class="card-body">
-        <!-- ✦ ADMIN: edita estas obsesiones -->
-        <div class="fav-list">
-          <div class="fav-item"><i class="fa-solid fa-music"></i> "Ride" - Lana Del Rey</div>
-          <div class="fav-item"><i class="fa-solid fa-tv"></i> Gilmore Girls (re-viendo)</div>
-          <div class="fav-item"><i class="fa-solid fa-mug-hot"></i> chai latte con canela</div>
-          <div class="fav-item"><i class="fa-solid fa-camera"></i> fotografía análoga</div>
-          <div class="fav-item"><i class="fa-solid fa-pen"></i> escribir cartas a nadie</div>
+
+        <!-- Canción 3 -->
+        <div class="music-card" data-audio="/music/Damiano David - Angel (Sub. Español  Lyrics).mp3" role="button" tabindex="0" aria-label="Reproducir canción 3">
+          <div class="album-art-wrapper">
+            <img src="/images/angel.png" alt="Álbum 3" class="album-art" />
+            <div class="play-overlay"><span class="play-icon">▶</span></div>
+            <div class="equalizer" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <p class="music-title">Angel</p>
+          <p class="music-artist">Song by Damiano David ‧ 2025</p>
         </div>
-      </div>
-    </div>
- 
-  </aside>
- 
-  <!-- ==========================================
-       ✦ CENTER — FEED + MUSIC + VIDEOS
-  ========================================== -->
-  <main class="center-col">
- 
-    <!-- FEED SCRAPBOOK -->
-    <div class="card" id="feed">
-      <div class="card-head"><i class="fa-solid fa-pen-nib"></i> mi feed personal</div>
-      <div class="card-body" style="padding-bottom:8px;">
-        <p style="font-size:.78rem;color:var(--text-soft);font-style:italic;">pensamientos, fotos y momentos ✦ solo de mi parte 💌</p>
-      </div>
-      <div id="posts-container" style="padding:0 0 4px;">
-        <!-- Posts rendered by JS -->
-      </div>
-    </div>
- 
-    <!-- MUSIC -->
-    <div class="card" id="music">
-      <div class="card-head"><i class="fa-solid fa-music"></i> mi música</div>
-      <div class="card-body">
-        <p style="font-size:.78rem;color:var(--text-soft);font-style:italic;margin-bottom:14px;">canciones que me definen y playlists que me acompañan 🎵</p>
-        <!-- ✦ ADMIN: edita esta lista de canciones -->
-        <div class="music-list" id="music-list">
-          <div class="music-item">
-            <div class="music-cover">🎵</div>
-            <div class="music-info">
-              <div class="music-title">Ride</div>
-              <div class="music-artist">Lana Del Rey</div>
-            </div>
-            <span class="music-badge">fav</span>
-          </div>
-          <div class="music-item">
-            <div class="music-cover">🌸</div>
-            <div class="music-info">
-              <div class="music-title">Young and Beautiful</div>
-              <div class="music-artist">Lana Del Rey</div>
+
+        <!-- Canción 4 -->
+        <div class="music-card" data-audio="/music/Olivia Rodrigo - jealousy, jealousy (Lyric Video).mp3" role="button" tabindex="0" aria-label="Reproducir canción 4">
+          <div class="album-art-wrapper">
+            <img src="/images/jealousy.jpg" alt="Álbum 4" class="album-art" />
+            <div class="play-overlay"><span class="play-icon">▶</span></div>
+            <div class="equalizer" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
             </div>
           </div>
-          <div class="music-item">
-            <div class="music-cover">✨</div>
-            <div class="music-info">
-              <div class="music-title">Cruel Summer</div>
-              <div class="music-artist">Taylor Swift</div>
-            </div>
-            <span class="music-badge">repeat</span>
-          </div>
-          <div class="music-item">
-            <div class="music-cover">💜</div>
-            <div class="music-info">
-              <div class="music-title">As It Was</div>
-              <div class="music-artist">Harry Styles</div>
+          <p class="music-title">jealousy, jealousy</p>
+          <p class="music-artist">Song by Olivia Rodrigo ‧ 2021</p>
+        </div>
+
+        <!-- Canción 5 -->
+        <div class="music-card" data-audio="/music/Sabrina Carpenter - Manchild (Lyrics).mp3" role="button" tabindex="0" aria-label="Reproducir canción 5">
+          <div class="album-art-wrapper">
+            <img src="/images/manchild.jpg" alt="Álbum 5" class="album-art" />
+            <div class="play-overlay"><span class="play-icon">▶</span></div>
+            <div class="equalizer" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
             </div>
           </div>
-          <div class="music-item">
-            <div class="music-cover">🌙</div>
-            <div class="music-info">
-              <div class="music-title">Glimpse of Us</div>
-              <div class="music-artist">Joji</div>
+          <p class="music-title">Manchild</p>
+          <p class="music-artist">Song by Sabrina Carpenter ‧ 2025</p>
+        </div>
+
+        <!-- Canción 6 -->
+        <div class="music-card" data-audio="/music/FUYU NO HANASHI - Given EP 9 (Spanish Cover by Tricker).m4a" role="button" tabindex="0" aria-label="Reproducir canción 6">
+          <div class="album-art-wrapper">
+            <img src="/images/invierno.png" alt="Álbum 6" class="album-art" />
+            <div class="play-overlay"><span class="play-icon">▶</span></div>
+            <div class="equalizer" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
             </div>
           </div>
-          <div class="music-item">
-            <div class="music-cover">🍒</div>
-            <div class="music-info">
-              <div class="music-title">Espresso</div>
-              <div class="music-artist">Sabrina Carpenter</div>
-            </div>
-            <span class="music-badge">era</span>
+          <p class="music-title">冬のはなし (fuyu no hanashi)</p>
+          <p class="music-artist">Given (Cover by Tricker) ‧ 2019</p>
+        </div>
+
+      </div><!-- fin .music-grid -->
+
+      <!-- Barra de progreso de la canción actual -->
+      <div class="now-playing-bar" id="now-playing-bar" aria-live="polite">
+        <span class="np-icon">♫</span>
+        <div class="np-info">
+          <span id="np-title">sin reproducir</span>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
           </div>
         </div>
- 
-        <!-- Playlist embed area -->
-        <div class="divider mt-16"><div class="dline"></div><span class="dico">🎶</span><div class="dline"></div></div>
-        <div style="background:rgba(255,220,240,.3);border:1.5px dashed rgba(255,160,210,.35);border-radius:var(--r-lg);padding:18px;text-align:center;margin-top:4px;">
-          <!-- ✦ ADMIN: pega aquí un iframe de Spotify, Apple Music, etc. -->
-          <p style="font-size:.78rem;color:var(--text-soft);">🎵 playlist embed — pega aquí tu iframe de Spotify</p>
-          <p style="font-size:.7rem;color:var(--text-soft);margin-top:4px;font-style:italic;">edita el código para incrustar tu playlist favorita</p>
-        </div>
+        <!-- Botón de silencio -->
+        <button class="mute-btn" id="mute-btn" aria-label="Silenciar">🔊</button>
       </div>
-    </div>
- 
-    <!-- VIDEOS -->
-    <div class="card" id="videos">
-      <div class="card-head"><i class="fa-solid fa-film"></i> mis videos favoritos</div>
-      <div class="card-body">
-        <p style="font-size:.78rem;color:var(--text-soft);font-style:italic;margin-bottom:14px;">clips, videos y cosas que me encantan 🎬</p>
-        <!-- ✦ ADMIN: edita los videos aquí -->
-        <div class="videos-grid" id="videos-grid">
-          <div class="video-card" onclick="toast('🎬 Abre el video en YouTube!','✨')">
-            <div class="video-thumb">🎬
-              <div class="play-btn-overlay"><div class="play-icon"><i class="fa-solid fa-play"></i></div></div>
-            </div>
-            <div class="video-info">
-              <div class="video-title">Aesthetic Morning Routine</div>
-              <div class="video-sub">inspo · 12 min</div>
-            </div>
-          </div>
-          <div class="video-card" onclick="toast('🎬 Abre el video en YouTube!','✨')">
-            <div class="video-thumb" style="background:linear-gradient(135deg,var(--purple-soft),var(--pink-soft));">🎵
-              <div class="play-btn-overlay"><div class="play-icon"><i class="fa-solid fa-play"></i></div></div>
-            </div>
-            <div class="video-info">
-              <div class="video-title">Lana Del Rey — Ride</div>
-              <div class="video-sub">música · video oficial</div>
-            </div>
-          </div>
-          <div class="video-card" onclick="toast('🎬 Abre el video en YouTube!','✨')">
-            <div class="video-thumb" style="background:linear-gradient(135deg,var(--mint-soft),var(--pink-soft));">📚
-              <div class="play-btn-overlay"><div class="play-icon"><i class="fa-solid fa-play"></i></div></div>
-            </div>
-            <div class="video-info">
-              <div class="video-title">book haul de otoño</div>
-              <div class="video-sub">booktok · favorito</div>
-            </div>
-          </div>
-          <div class="video-card" onclick="toast('🎬 Abre el video en YouTube!','✨')">
-            <div class="video-thumb" style="background:linear-gradient(135deg,var(--gold-light),var(--pink-soft));">☕
-              <div class="play-btn-overlay"><div class="play-icon"><i class="fa-solid fa-play"></i></div></div>
-            </div>
-            <div class="video-info">
-              <div class="video-title">café shop vlog</div>
-              <div class="video-sub">vlog · cozy vibes</div>
-            </div>
-          </div>
+
+    </section><!-- fin #music-section -->
+
+
+    <!-- ===================================================
+         GALERÍA DE FOTOS — ESTILO POLAROID
+         Diseño asimétrico para que se vea más aesthetic
+    =================================================== -->
+    <section id="photo-section" class="section-block">
+      <h2 class="section-title">❟❛❟ Photos</h2>
+      <p class="section-subtitle">memories & moments</p>
+
+      <div class="photo-collage">
+
+        <!--
+          📸 CÓMO AGREGAR UNA FOTO:
+          1. Cambia src="..." por la URL de tu foto
+          2. Cambia el alt="..." por una descripción breve
+          3. Cambia el texto dentro de <p class="polaroid-caption"> por tu pie de foto
+          4. Puedes cambiar la clase del wrapper: "polaroid tilt-left", "polaroid tilt-right", "polaroid big"
+        -->
+
+        <div class="polaroid tilt-left">
+          <img src="https://picsum.photos/seed/photo1/400/400" alt="foto 1" />
+          <!-- CAMBIA ESTE PIE DE FOTO -->
+          <p class="polaroid-caption">golden hour ♡</p>
         </div>
-        <!-- ✦ ADMIN: pega un iframe de YouTube aquí si quieres -->
-        <div style="background:rgba(255,220,240,.3);border:1.5px dashed rgba(255,160,210,.35);border-radius:var(--r-lg);padding:14px;text-align:center;margin-top:14px;">
-          <p style="font-size:.78rem;color:var(--text-soft);">🎬 video embed — pega aquí un iframe de YouTube</p>
+
+        <div class="polaroid tilt-right big">
+          <img src="https://picsum.photos/seed/photo2/400/500" alt="foto 2" />
+          <p class="polaroid-caption">best day ever ✨</p>
         </div>
-      </div>
-    </div>
- 
-  </main>
- 
-  <!-- ==========================================
-       ✦ RIGHT SIDEBAR — PEARPHONE + GUESTBOOK
-  ========================================== -->
-  <aside class="right-col">
- 
-    <!-- PEARPHONE -->
-    <div class="card pearphone-wrap">
-      <div class="pp-label">✦ PearPhone ✦</div>
-      <div class="pearphone" role="region" aria-label="Estados personales">
-        <div class="pp-notch"></div>
-        <div class="pp-screen">
-          <div class="pp-topbar">
-            <span class="pp-brand">Pear✦</span>
-            <div class="pp-icons">
-              <i class="fa-solid fa-signal"></i>
-              <i class="fa-solid fa-wifi"></i>
-              <i class="fa-solid fa-battery-full"></i>
+
+        <div class="polaroid tilt-left">
+          <img src="https://picsum.photos/seed/photo3/400/400" alt="foto 3" />
+          <p class="polaroid-caption">coffee & dreams</p>
+        </div>
+
+        <div class="polaroid no-tilt">
+          <img src="https://picsum.photos/seed/photo4/400/400" alt="foto 4" />
+          <p class="polaroid-caption">soft life 🌸</p>
+        </div>
+
+        <div class="polaroid tilt-right">
+          <img src="https://picsum.photos/seed/photo5/400/400" alt="foto 5" />
+          <p class="polaroid-caption">forever summer</p>
+        </div>
+
+        <div class="polaroid tilt-left big">
+          <img src="https://picsum.photos/seed/photo6/400/500" alt="foto 6" />
+          <p class="polaroid-caption">my little world ✦</p>
+        </div>
+
+        <div class="polaroid tilt-right">
+          <img src="https://picsum.photos/seed/photo7/400/400" alt="foto 7" />
+          <p class="polaroid-caption">pink everything</p>
+        </div>
+
+      </div><!-- fin .photo-collage -->
+    </section><!-- fin #photo-section -->
+
+
+    <!-- ===================================================
+         SECCIÓN DE DOS COLUMNAS: NOTAS + LIBROS
+    =================================================== -->
+    <div class="two-col-section">
+
+      <!-- -------------------------------------------------
+           DIARIO / NOTAS — estilo libreta con líneas
+      ------------------------------------------------- -->
+      <section id="notes-section" class="section-block notes-block">
+        <h2 class="section-title">✎ mi diario</h2>
+        <p class="section-subtitle">pensamientos & feeling</p>
+
+        <!-- El scroll personalizado está en CSS (.notes-scroll) -->
+        <div class="notes-scroll">
+
+          <!--
+            📝 CÓMO EDITAR TUS NOTAS:
+            Solo edita el texto dentro de <div class="note-entry">
+            Puedes duplicar todo el bloque para agregar más notas
+          -->
+
+          <div class="note-entry">
+            <span class="note-date">✦ hoy</span>
+            <!-- CAMBIA ESTE TEXTO POR TU NOTA -->
+            <p>Hoy me desperté con el sol entrando por la ventana y pensé: la vida es demasiado corta para no tener flores en el cuarto. 🌸</p>
+          </div>
+
+          <div class="note-entry">
+            <span class="note-date">✦ ayer</span>
+            <p>Escuché esa canción que me recuerda a aquel verano. Creo que algunos momentos viven para siempre en tres minutos de melodía.</p>
+          </div>
+
+          <div class="note-entry">
+            <span class="note-date">✦ esta semana</span>
+            <p>Decidí que voy a leer más, preocuparme menos y tomar más fotos de las cosas bonitas que nadie nota. ✨</p>
+          </div>
+
+          <div class="note-entry">
+            <span class="note-date">✦ recordatorio</span>
+            <p>Eres suficiente. Siempre lo has sido. Ahora ve por ese café con leche que mereces. ♡</p>
+          </div>
+
+          <div class="note-entry">
+            <span class="note-date">✦ sueños</span>
+            <p>Quiero un departamento lleno de plantas, libros apilados hasta el techo y una luz suave que lo haga todo parecer una película de Sofia Coppola.</p>
+          </div>
+
+        </div><!-- fin .notes-scroll -->
+      </section><!-- fin #notes-section -->
+
+
+      <!-- -------------------------------------------------
+           BIBLIOTECA — libros favoritos
+      ------------------------------------------------- -->
+      <section id="books-section" class="section-block books-block">
+        <h2 class="section-title">◈ mi biblioteca</h2>
+        <p class="section-subtitle">libros que viven en mi corazón</p>
+
+        <div class="books-grid">
+
+          <!--
+            📚 CÓMO AGREGAR UN LIBRO:
+            1. Cambia src="..." por la URL de la portada del libro
+            2. Cambia el alt="..." por el título del libro
+            3. Cambia los textos de .book-title y .book-author
+          -->
+
+          <div class="book-card">
+            <div class="book-cover-wrapper">
+              <img src="https://picsum.photos/seed/book1/150/220" alt="Libro 1" class="book-cover" />
+              <div class="book-shine" aria-hidden="true"></div>
             </div>
+            <!-- CAMBIA POR EL TÍTULO DEL LIBRO -->
+            <p class="book-title">título del libro</p>
+            <!-- CAMBIA POR EL AUTOR/A -->
+            <p class="book-author">autor/a</p>
           </div>
-          <div class="pp-states-area" id="pp-states" aria-label="Mis estados">
-            <!-- Rendered by JS -->
+
+          <div class="book-card">
+            <div class="book-cover-wrapper">
+              <img src="https://picsum.photos/seed/book2/150/220" alt="Libro 2" class="book-cover" />
+              <div class="book-shine" aria-hidden="true"></div>
+            </div>
+            <p class="book-title">título del libro</p>
+            <p class="book-author">autor/a</p>
           </div>
-          <div class="pp-input-row">
-            <input class="pp-input" id="pp-input" placeholder="escribe tu estado... ✿" maxlength="120"
-              onkeydown="if(event.key==='Enter')addPPState()" aria-label="Nuevo estado"/>
-            <button class="pp-send" onclick="addPPState()" aria-label="Publicar estado">
-              <i class="fa-solid fa-paper-plane"></i>
-            </button>
+
+          <div class="book-card">
+            <div class="book-cover-wrapper">
+              <img src="https://picsum.photos/seed/book3/150/220" alt="Libro 3" class="book-cover" />
+              <div class="book-shine" aria-hidden="true"></div>
+            </div>
+            <p class="book-title">título del libro</p>
+            <p class="book-author">autor/a</p>
           </div>
-          <div class="pp-footer-brand">PearPhone ✦</div>
-        </div>
-      </div>
-      <p style="font-size:.68rem;color:var(--text-soft);text-align:center;margin-top:10px;font-style:italic;">
-        ✦ solo la admin puede escribir estados
-      </p>
-    </div>
- 
-    <!-- VISITOR REACTIONS -->
-    <div class="card">
-      <div class="card-head"><i class="fa-solid fa-heart"></i> déjame tu energía</div>
-      <div class="card-body">
-        <p style="font-size:.78rem;color:var(--text-soft);margin-bottom:12px;">¿qué onda te da mi espacio? 💖</p>
-        <div class="reactions-bar" id="reactions-bar">
-          <div class="big-react" onclick="react(this,'💖','te manda amor')">
-            <span class="emoji">💖</span><span id="cnt-0">0</span>
+
+          <div class="book-card">
+            <div class="book-cover-wrapper">
+              <img src="https://picsum.photos/seed/book4/150/220" alt="Libro 4" class="book-cover" />
+              <div class="book-shine" aria-hidden="true"></div>
+            </div>
+            <p class="book-title">título del libro</p>
+            <p class="book-author">autor/a</p>
           </div>
-          <div class="big-react" onclick="react(this,'✨','le encanta')">
-            <span class="emoji">✨</span><span id="cnt-1">0</span>
+
+          <div class="book-card">
+            <div class="book-cover-wrapper">
+              <img src="https://picsum.photos/seed/book5/150/220" alt="Libro 5" class="book-cover" />
+              <div class="book-shine" aria-hidden="true"></div>
+            </div>
+            <p class="book-title">título del libro</p>
+            <p class="book-author">autor/a</p>
           </div>
-          <div class="big-react" onclick="react(this,'🌸','te da flores')">
-            <span class="emoji">🌸</span><span id="cnt-2">0</span>
+
+          <div class="book-card">
+            <div class="book-cover-wrapper">
+              <img src="https://picsum.photos/seed/book6/150/220" alt="Libro 6" class="book-cover" />
+              <div class="book-shine" aria-hidden="true"></div>
+            </div>
+            <p class="book-title">título del libro</p>
+            <p class="book-author">autor/a</p>
           </div>
-          <div class="big-react" onclick="react(this,'🎀','te manda un lazo')">
-            <span class="emoji">🎀</span><span id="cnt-3">0</span>
-          </div>
-          <div class="big-react" onclick="react(this,'☕','te da un café')">
-            <span class="emoji">☕</span><span id="cnt-4">0</span>
-          </div>
-          <div class="big-react" onclick="react(this,'🌙','te manda buenas vibras')">
-            <span class="emoji">🌙</span><span id="cnt-5">0</span>
-          </div>
-        </div>
-      </div>
-    </div>
- 
-    <!-- VISITOR IMAGE UPLOAD -->
-    <div class="card">
-      <div class="card-head"><i class="fa-solid fa-images"></i> mándame una fotito</div>
-      <div class="card-body">
-        <p style="font-size:.78rem;color:var(--text-soft);margin-bottom:10px;">sube algo bonito para que lo vea 🌷</p>
-        <input type="file" id="visit-img-input" accept="image/*" multiple style="display:none" onchange="previewVisitImg(event)"/>
-        <div class="visit-img-area" onclick="document.getElementById('visit-img-input').click()" role="button" tabindex="0" aria-label="Subir imagen">
-          <i class="fa-solid fa-camera" style="font-size:1.6rem;color:var(--pink-soft);"></i>
-          <p>toca para subir una imagen</p>
-        </div>
-        <div class="visit-img-preview" id="visit-preview"></div>
-      </div>
-    </div>
- 
-    <!-- GUESTBOOK -->
-    <div class="card" id="guestbook">
-      <div class="card-head"><i class="fa-solid fa-book-open"></i> libro de visitas</div>
-      <div class="card-body">
-        <p style="font-size:.78rem;color:var(--text-soft);margin-bottom:12px;">firma y déjame un mensajito 💌</p>
-        <div class="guestbook-list" id="gb-list">
-          <!-- Rendered by JS -->
-        </div>
-        <div class="divider"><div class="dline"></div><span class="dico">✦</span><div class="dline"></div></div>
-        <div class="gb-form mt-12">
-          <input class="gb-name-input" id="gb-name" placeholder="tu nombre o alias ✿" maxlength="30" aria-label="Tu nombre"/>
-          <textarea class="gb-msg-input" id="gb-msg" placeholder="tu mensaje para mí... 💌" maxlength="200" aria-label="Tu mensaje"></textarea>
-          <button class="btn-gloss btn-pink w100" onclick="addGBEntry()" style="justify-content:center;">
-            <i class="fa-solid fa-signature"></i> firmar ✦
-          </button>
-        </div>
-      </div>
-    </div>
- 
-  </aside>
- 
-</div><!-- /.main-grid -->
- 
-<!-- ============================================================
-     ✦ FOOTER
-============================================================ -->
-<footer id="footer">
-  <div class="footer-in">
-    <span class="footer-logo">✦ mi cuartito ✦</span>
-    <span class="footer-txt">hecho con 💖 y mucho glitter · © 2024</span>
-    <div class="footer-links">
-      <a href="#hero" class="footer-link">inicio</a>
-      <a href="#feed" class="footer-link">feed</a>
-      <a href="#guestbook" class="footer-link">visitas</a>
-    </div>
-  </div>
-</footer>
- 
-</div><!-- /#site -->
- 
-<!-- ============================================================
-     ✦ VISITOR MODAL
-============================================================ -->
-<div id="visitor-modal" style="display:none;" class="modal-bg" onclick="if(event.target===this)closeModal()">
-  <div class="modal-box">
-    <div class="modal-title">💌 déjame un mensaje</div>
-    <input class="modal-input" id="vm-name" placeholder="tu nombre o alias ✿" maxlength="30"/>
-    <textarea class="modal-input" id="vm-msg" placeholder="escríbeme algo lindo... 🌸" style="height:90px;resize:none;" maxlength="250"></textarea>
-    <div class="modal-btns">
-      <button class="btn-gloss btn-ghost" onclick="closeModal()">cancelar</button>
-      <button class="btn-gloss btn-pink" onclick="sendVisitorMsg()">
-        <i class="fa-solid fa-paper-plane"></i> enviar 💖
-      </button>
-    </div>
-  </div>
-</div>
- 
-<!-- ============================================================
-     ✦ JAVASCRIPT
-============================================================ -->
-<script>
-'use strict';
- 
-/* ============================================================
-   ✦ DATA — ADMIN EDITABLE (modifica aquí el contenido)
-============================================================ */
- 
-// ✦ ADMIN: Tus posts del feed personal
-// type: 'thought' | 'photo' | 'quote' | 'music'
-const ADMIN_POSTS = [
-  {
-    id: 'post1',
-    type: 'quote',
-    content: '"no me arrepiento de nada porque todo me hizo ser quien soy hoy, y quien soy hoy es alguien que ama las flores y los días lentos"',
-    tags: ['pensamientos', 'vida'],
-    date: 'hace 2 días'
-  },
-  {
-    id: 'post2',
-    type: 'thought',
-    content: 'hoy me desperté pensando en lo bonito que es que el sol entre por la ventana a las 9am y todo se vea dorado ✨ esas pequeñas cosas que hacen que el día valga la pena antes de que empiece de verdad',
-    tags: ['diario', 'mornings', 'aesthetic'],
-    date: 'hace 3 días'
-  },
-  {
-    id: 'post3',
-    type: 'photo',
-    // ✦ ADMIN: reemplaza este URL por el de tu foto
-    imageUrl: 'https://images.unsplash.com/photo-1490750967868-88df5691cc78?w=700&q=75&fit=crop',
-    content: 'flores de la semana 🌷 las compré en el mercado del sábado y llevan tres días alegrándome el cuarto',
-    tags: ['flores', 'cuarto', 'aesthetic'],
-    date: 'hace 5 días'
-  },
-  {
-    id: 'post4',
-    type: 'music',
-    content: 'estoy en modo "Ride" de Lana del Ray en bucle y no me voy a disculpar. hay canciones que no describen una canción, describen una sensación entera 🎵',
-    tags: ['música', 'lana', 'feelings'],
-    date: 'hace 1 semana'
-  },
-  {
-    id: 'post5',
-    type: 'thought',
-    content: 'me estoy leyendo Persuasión de Jane Austen por tercera vez y sigo sin cansarme. creo que Anne Elliot es la heroína más subestimada de toda la literatura 📚',
-    tags: ['libros', 'janeausten', 'lectura'],
-    date: 'hace 1 semana'
-  }
-];
- 
-// ✦ ADMIN: Estados del PearPhone (solo tú los pones)
-const ADMIN_PP_STATES = [
-  { text: '🌸 actualmente: siendo el personaje principal de mi propia historia', time: 'hace un momento' },
-  { text: '☕ tomando café y fingiendo que tengo todo bajo control', time: 'hace 2h' },
-  { text: '🎵 on repeat: Ride - Lana Del Rey', time: 'ayer' },
-  { text: '✨ hoy es un buen día para ser feliz sin razón especial', time: 'ayer' },
-];
- 
-// ✦ INITIAL GUESTBOOK ENTRIES (visitors)
-const INITIAL_GB = [
-  { name: 'anita.linda', msg: '¡me encanta tu espacio! siempre tan bonito todo 💖', time: 'hace 1 día' },
-  { name: 'visitante123', msg: 'llegué por casualidad y me quedé media hora. que cute es todo esto ✨', time: 'hace 3 días' },
-];
- 
-/* ============================================================
-   ✦ STATE
-============================================================ */
-let ppStates      = [...ADMIN_PP_STATES];
-let gbEntries     = loadLS('gb_entries') || [...INITIAL_GB];
-let reactionCounts = loadLS('reaction_counts') || [0,0,0,0,0,0];
-let postReactions  = loadLS('post_reactions') || {};
- 
-/* ============================================================
-   ✦ LOCAL STORAGE HELPERS
-============================================================ */
-function saveLS(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} }
-function loadLS(key) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : null; } catch(e){ return null; } }
- 
-/* ============================================================
-   ✦ SPARKLES BACKGROUND
-============================================================ */
-function initSparkles() {
-  const field = document.getElementById('sparkles');
-  const count = 28;
-  for (let i = 0; i < count; i++) {
-    const sp = document.createElement('div');
-    sp.className = 'sp';
-    const size = 3 + Math.random() * 5;
-    sp.style.cssText = `
-      width:${size}px;height:${size}px;
-      top:${Math.random()*100}%;left:${Math.random()*100}%;
-      animation-delay:${Math.random()*4}s;
-      animation-duration:${2.5+Math.random()*3}s;
-      background:${Math.random()>.5 ? '#f0c060' : '#ffb3d9'};
-      opacity:.5;
-    `;
-    field.appendChild(sp);
-  }
-}
- 
-/* ============================================================
-   ✦ GLITTER ON CLICK
-============================================================ */
-document.addEventListener('click', e => {
-  const colors = ['#ff6eb4','#f0c060','#ffb3d9','#d4907a','#e8d0f8'];
-  for (let i = 0; i < 6; i++) {
-    const g = document.createElement('div');
-    g.className = 'glitter';
-    const angle = Math.random() * Math.PI * 2;
-    const dist  = 30 + Math.random() * 60;
-    g.style.cssText = `
-      left:${e.clientX}px;top:${e.clientY}px;
-      background:${colors[Math.floor(Math.random()*colors.length)]};
-      --gx:${Math.cos(angle)*dist}px;--gy:${Math.sin(angle)*dist}px;
-    `;
-    document.body.appendChild(g);
-    setTimeout(() => g.remove(), 850);
-  }
-});
- 
-/* ============================================================
-   ✦ TOAST
-============================================================ */
-function toast(msg, ico='✨') {
-  const c = document.getElementById('toasts');
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.setAttribute('role','alert');
-  t.innerHTML = `<span class="toast-ico">${ico}</span><span class="toast-txt">${msg}</span>`;
-  c.appendChild(t);
-  setTimeout(() => {
-    t.classList.add('out');
-    setTimeout(() => t.remove(), 320);
-  }, 2800);
-}
- 
-/* ============================================================
-   ✦ SCROLL NAV
-============================================================ */
-function scrollTo(id, btn) {
-  document.getElementById(id)?.scrollIntoView({ behavior:'smooth', block:'start' });
-  if (btn) {
-    document.querySelectorAll('.hn-btn').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-  }
-}
- 
-/* ============================================================
-   ✦ RENDER POSTS
-============================================================ */
-function timeAgo(str) { return str; } // uses admin-set string directly
- 
-function renderPosts() {
-  const container = document.getElementById('posts-container');
-  container.innerHTML = '';
-  ADMIN_POSTS.forEach((post, idx) => {
-    const el = buildPost(post, idx);
-    container.appendChild(el);
-  });
-}
- 
-function buildPost(post, idx) {
-  const wrap = document.createElement('article');
-  wrap.id = 'post-' + post.id;
-  wrap.style.animationDelay = (idx * 0.08) + 's';
- 
-  const badgeMap = {
-    thought: '<span class="post-type-badge badge-thought">✍️ pensamiento</span>',
-    photo:   '<span class="post-type-badge badge-photo">📷 foto</span>',
-    quote:   '<span class="post-type-badge badge-quote">💬 cita</span>',
-    music:   '<span class="post-type-badge badge-music">🎵 música</span>',
-  };
- 
-  const tagsHtml = (post.tags||[]).map(t=>`<span class="ptag">#${t}</span>`).join('');
-  const imgHtml  = post.imageUrl
-    ? `<div class="post-img-wrap"><img src="${post.imageUrl}" class="post-img" alt="Post" loading="lazy"/></div>`
-    : '';
-  const bodyClass = post.type==='quote' ? 'post-body is-quote' : 'post-body';
-  const reactions  = postReactions[post.id] || { heart:0, sparkle:0, liked:false };
- 
-  wrap.innerHTML = `
-    <div class="post-tape"><div class="tape"></div></div>
-    <div class="post-inner scrap-post" style="border-radius:0;box-shadow:none;border:none;background:transparent;">
-      <div class="post-hdr">
-        <div class="post-ava">🌸</div>
-        <div>
-          <div class="post-who">Cami <span class="admin-badge">✦ admin</span></div>
-          <div class="post-when">${post.date}</div>
-        </div>
-        ${badgeMap[post.type]||''}
-      </div>
-      ${imgHtml}
-      ${post.content ? `<div class="${bodyClass}">${escH(post.content)}</div>` : ''}
-      ${tagsHtml ? `<div class="post-tags">${tagsHtml}</div>` : ''}
-      <div class="post-foot">
-        <button class="react-btn ${reactions.liked?'on':''}" onclick="togglePostLike('${post.id}',this)" aria-label="Like" aria-pressed="${reactions.liked}">
-          <span class="rh">${reactions.liked?'💝':'🤍'}</span>
-          <span class="like-num">${reactions.heart}</span>
-        </button>
-        <button class="react-btn" onclick="toggleComments('${post.id}')" aria-label="Comentarios">
-          💬 <span class="cmt-count">${(loadLS('cmts_'+post.id)||[]).length}</span>
-        </button>
-      </div>
-    </div>
-    <div class="comments-wrap" id="cmts-${post.id}">
-      <div class="cmt-list" id="cmt-list-${post.id}"></div>
-      <div class="cmt-input-row">
-        <div class="cmt-ava">👤</div>
-        <input class="cmt-input" id="ci-${post.id}" placeholder="deja un comentario ✨" maxlength="200"
-          onkeydown="if(event.key==='Enter')addComment('${post.id}')" aria-label="Comentario"/>
-        <button class="cmt-send" onclick="addComment('${post.id}')" aria-label="Enviar"><i class="fa-solid fa-paper-plane"></i></button>
-      </div>
-    </div>
-  `;
- 
-  // wrap in scrap card
-  const outer = document.createElement('div');
-  outer.className = 'scrap-post';
-  outer.style.animationDelay = (idx*0.08)+'s';
-  outer.appendChild(wrap);
- 
-  // load existing comments
-  const existCmts = loadLS('cmts_'+post.id) || [];
-  const cList = wrap.querySelector('#cmt-list-'+post.id);
-  existCmts.forEach(c => cList.appendChild(buildCmt(c)));
- 
-  return outer;
-}
- 
-function buildCmt(c) {
-  const d = document.createElement('div');
-  d.className = 'cmt-item';
-  d.innerHTML = `
-    <div class="cmt-ava">👤</div>
-    <div class="cmt-bubble">
-      <div class="cmt-who">${escH(c.name)}</div>
-      <div class="cmt-txt">${escH(c.text)}</div>
-    </div>
-  `;
-  return d;
-}
- 
-function escH(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
- 
-function toggleComments(postId) {
-  const wrap = document.getElementById('cmts-'+postId);
-  const isOpen = wrap.classList.toggle('open');
-  if (isOpen) setTimeout(()=>document.getElementById('ci-'+postId)?.focus(),60);
-}
- 
-function addComment(postId) {
-  const input = document.getElementById('ci-'+postId);
-  if (!input) return;
-  const text = input.value.trim();
-  if (!text) { toast('✍️ escribe algo primero','💭'); return; }
- 
-  // Ask for name if first comment
-  const name = prompt('¿cómo te llamas? (alias o nombre) ✿') || 'visitante';
- 
-  const c = { name, text };
-  const list = loadLS('cmts_'+postId) || [];
-  list.push(c);
-  saveLS('cmts_'+postId, list);
- 
-  const cList = document.getElementById('cmt-list-'+postId);
-  cList.appendChild(buildCmt(c));
-  input.value = '';
- 
-  // update count
-  const btn = document.querySelector(`#post-${postId} .cmt-count`);
-  if (btn) btn.textContent = list.length;
- 
-  toast('💌 comentario enviado, ¡gracias!','💖');
-  cList.scrollTop = cList.scrollHeight;
-}
- 
-function togglePostLike(postId, btn) {
-  const rs = postReactions[postId] || { heart:0, sparkle:0, liked:false };
-  rs.liked = !rs.liked;
-  rs.heart += rs.liked ? 1 : -1;
-  postReactions[postId] = rs;
-  saveLS('post_reactions', postReactions);
- 
-  btn.classList.toggle('on', rs.liked);
-  btn.querySelector('.rh').textContent = rs.liked ? '💝' : '🤍';
-  btn.querySelector('.like-num').textContent = rs.heart;
-  btn.setAttribute('aria-pressed', rs.liked);
-  if (rs.liked) toast('💖 ¡le diste amor a este post!','✨');
-}
- 
-/* ============================================================
-   ✦ PEARPHONE STATES
-============================================================ */
-function renderPPStates() {
-  const area = document.getElementById('pp-states');
-  area.innerHTML = '';
-  ppStates.forEach(s => {
-    const b = document.createElement('div');
-    b.className = 'pp-state-bubble';
-    b.innerHTML = `${escH(s.text)}<div class="pp-state-meta">${s.time}</div>`;
-    area.appendChild(b);
-  });
-  area.scrollTop = area.scrollHeight;
-}
- 
-function addPPState() {
-  const inp = document.getElementById('pp-input');
-  const text = inp.value.trim();
-  if (!text) return;
-  const newState = { text, time: 'ahora mismo' };
-  ppStates.push(newState);
-  // also update hero status
-  document.getElementById('hero-status-text').textContent = '✿ ' + text;
-  inp.value = '';
-  renderPPStates();
-  toast('✦ estado publicado!','🌸');
-}
- 
-/* ============================================================
-   ✦ GUESTBOOK
-============================================================ */
-function renderGuestbook() {
-  const list = document.getElementById('gb-list');
-  list.innerHTML = '';
-  gbEntries.slice().reverse().slice(0,8).forEach(e => {
-    const d = document.createElement('div');
-    d.className = 'gb-entry';
-    d.innerHTML = `
-      <div class="gb-who">✦ ${escH(e.name)}</div>
-      <div class="gb-msg">${escH(e.msg)}</div>
-      <div class="gb-when">${e.time}</div>
-    `;
-    list.appendChild(d);
-  });
-}
- 
-function addGBEntry() {
-  const name = document.getElementById('gb-name').value.trim();
-  const msg  = document.getElementById('gb-msg').value.trim();
-  if (!name || !msg) { toast('✍️ pon tu nombre y mensaje','💭'); return; }
- 
-  const entry = { name, msg, time: 'ahora mismo' };
-  gbEntries.push(entry);
-  saveLS('gb_entries', gbEntries);
-  renderGuestbook();
- 
-  document.getElementById('gb-name').value = '';
-  document.getElementById('gb-msg').value = '';
-  toast('💌 ¡gracias por firmar mi libro!','💖');
-}
- 
-/* ============================================================
-   ✦ REACTIONS
-============================================================ */
-function react(el, emoji, action) {
-  const idx  = [...el.parentElement.children].indexOf(el);
-  const cntEl = el.querySelector('span:last-child');
- 
-  reactionCounts[idx] = (reactionCounts[idx] || 0) + 1;
-  saveLS('reaction_counts', reactionCounts);
-  cntEl.textContent = reactionCounts[idx];
- 
-  el.classList.add('bumped');
-  setTimeout(() => el.classList.remove('bumped'), 450);
-  toast(`${emoji} alguien ${action} 💖`, emoji);
-}
- 
-function loadReactions() {
-  const saved = loadLS('reaction_counts');
-  if (!saved) return;
-  reactionCounts = saved;
-  saved.forEach((n, i) => {
-    const el = document.querySelector(`#cnt-${i}`);
-    if (el) el.textContent = n;
-  });
-}
- 
-/* ============================================================
-   ✦ VISITOR MODAL
-============================================================ */
-function showVisitorModal() {
-  document.getElementById('visitor-modal').style.display = 'flex';
-}
-function closeModal() {
-  document.getElementById('visitor-modal').style.display = 'none';
-}
-function sendVisitorMsg() {
-  const name = document.getElementById('vm-name').value.trim();
-  const msg  = document.getElementById('vm-msg').value.trim();
-  if (!name || !msg) { toast('✍️ completa tu nombre y mensaje','💭'); return; }
- 
-  const entry = { name, msg, time: 'ahora mismo' };
-  gbEntries.push(entry);
-  saveLS('gb_entries', gbEntries);
-  renderGuestbook();
- 
-  document.getElementById('vm-name').value = '';
-  document.getElementById('vm-msg').value = '';
-  closeModal();
-  toast('💌 ¡mensaje enviado! gracias 💖','✨');
-}
- 
-/* ============================================================
-   ✦ VISITOR IMAGE UPLOAD
-============================================================ */
-function previewVisitImg(event) {
-  const files = Array.from(event.target.files);
-  const preview = document.getElementById('visit-preview');
-  files.slice(0,4).forEach(file => {
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      img.alt = 'Foto del visitante';
-      preview.appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  });
-  event.target.value = '';
-  toast('📸 ¡foto recibida, gracias!','🌸');
-}
- 
-/* ============================================================
-   ✦ HEADER ACTIVE STATE ON SCROLL
-============================================================ */
-const sections = ['hero','about','feed','music','videos','guestbook'];
-const navBtns  = document.querySelectorAll('.hn-btn');
- 
-window.addEventListener('scroll', () => {
-  let current = 'hero';
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && window.scrollY >= el.offsetTop - 120) current = id;
-  });
-  navBtns.forEach((btn, i) => {
-    btn.classList.toggle('on', sections[i] === current);
-  });
-}, { passive:true });
- 
-/* ============================================================
-   ✦ KEYBOARD ACCESSIBILITY
-============================================================ */
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('visit-img-area')) {
-    e.preventDefault(); document.getElementById('visit-img-input').click();
-  }
-});
- 
-/* ============================================================
-   ✦ INIT
-============================================================ */
-document.addEventListener('DOMContentLoaded', () => {
-  initSparkles();
-  renderPosts();
-  renderPPStates();
-  renderGuestbook();
-  loadReactions();
-});
-</script>
- 
+
+        </div><!-- fin .books-grid -->
+      </section><!-- fin #books-section -->
+
+    </div><!-- fin .two-col-section -->
+
+
+    <!-- ===================================================
+         FOOTER
+    =================================================== -->
+    <footer class="site-footer">
+      <!-- CAMBIA ESTE TEXTO POR TU NOMBRE / LO QUE QUIERAS -->
+      <p>hecho con ♡ y muchos cafés · <span class="footer-year"></span></p>
+      <p class="footer-deco">✦ ✧ ✦ ✧ ✦</p>
+    </footer>
+
+  </div><!-- fin #page-wrapper -->
+
+
+  <!-- =====================================================
+       ELEMENTO DE AUDIO INVISIBLE
+       JS lo controla desde abajo — NO LO BORRES
+  ===================================================== -->
+  <audio id="main-audio" preload="none"></audio>
+
+  <!-- Enlace al archivo JavaScript -->
+  <script src="./JS/script.js"></script>
+
 </body>
 </html>
